@@ -1,5 +1,5 @@
 image:
-  repository: kairemor/django-hw-app
+  repository: kairemor/django-app
   tag: latest
 service:
   type: NodePort

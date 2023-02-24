@@ -19,13 +19,5 @@ spec:
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         ports:
         - containerPort: 8000
-        env:
-        - name: SECRET_KEY
-          valueFrom:
-            secretKeyRef:
-              name: your_secret_name
-              key: secret_key
-        - name: ALLOWED_HOSTS
-          value: your_allowed_hosts
         # Customize any additional environment variables here
       # Customize any additional containers here
