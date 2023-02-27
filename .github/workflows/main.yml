@@ -13,28 +13,22 @@ jobs:
     steps:
     - name: Clone external repo
       uses: actions/checkout@v2
-    - name: Clone external repo
-      uses: actions/checkout@v2
-      with:
-        repository: kairemor/helm-charts
-        ref: main
-        path: helm-charts
     
     - name: Get commit hash
       id: get_commit_hash
       run: echo "::set-output name=commit_hash::$(git rev-parse --short HEAD)"
 
-    # - name: Build the Docker image
-    #   run: docker build -t  ${{ secrets.DOCKERHUB_USERNAME }}/django-app:${{ steps.get_commit_hash.outputs.commit_hash }} .
+    - name: Build the Docker image
+      run: docker build -t  ${{ secrets.DOCKERHUB_USERNAME }}/django-app:${{ steps.get_commit_hash.outputs.commit_hash }} .
     
-    # - name: Log in to DockerHub
-    #   uses: docker/login-action@v1
-    #   with:
-    #     username: ${{ secrets.DOCKERHUB_USERNAME }}
-    #     password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    - name: Log in to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
     
-    # - name: Push Docker image to DockerHub
-    #   run: docker push  ${{ secrets.DOCKERHUB_USERNAME }}/django-app:${{ steps.get_commit_hash.outputs.commit_hash }}
+    - name: Push Docker image to DockerHub
+      run: docker push  ${{ secrets.DOCKERHUB_USERNAME }}/django-app:${{ steps.get_commit_hash.outputs.commit_hash }}
 
     - name: Install yq
       run: |
@@ -44,24 +38,12 @@ jobs:
       
     - name: Set image tag in values file
       run: |
-        git config --global user.email "kairemor@gmail.com"
-        git config --global user.name "Mor Kaire"
-        cd helm-charts
-        yq eval '.image.tag = "${{ steps.get_commit_hash.outputs.commit_hash }}"' -i values.yaml
-        git add values.yaml
-        git commit -m "Update image tag in values.yaml"
-        git push --set-upstream https://kairemor:$GIT_TOKEN@github.com/kairemor/helm-charts
+        yq eval '.image.tag = "${{ steps.get_commit_hash.outputs.commit_hash }}"' -i helm_chart/values.yaml
 
-    
-    # - name: Pushes to public repository
-    #   id: push_directory
-    #   uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
-    #   env:
-    #     SSH_DEPLOY_KEY: ${{ secrets.WORKFLOW_DEPLOY_KEY }}
-    #   with:
-    #     source-directory: output/
-    #     destination-github-username: 'pllee4-Experimental'
-    #     destination-repository-name: 'mock-medium-output'
-    #     user-email: pinloon_0428@hotmail.com
-    #     commit-message: pushed from $GITHUB_REF
-    #     target-branch: master
+    - name: Push Code
+      uses: devops-infra/action-commit-push@master
+      with:
+        github_token: "${{ secrets.GITHUB_TOKEN }}"
+        commit_prefix: "[AUTO]"
+        commit_message: "Automatic commit"
+
