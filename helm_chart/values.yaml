@@ -1,6 +1,6 @@
 image:
   repository: kairemor/django-app
-  tag: latest
+  tag: af36c44
 service:
   type: NodePort
   port: 8090
