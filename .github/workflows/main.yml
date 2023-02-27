@@ -52,9 +52,15 @@ jobs:
         git commit -m "Update image tag in values.yaml"
 
     
-    - name: Push changes
-      uses: ad-m/github-push-action@v0.6.0
+    - name: Pushes to public repository
+      id: push_directory
+      uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
+      env:
+        SSH_DEPLOY_KEY: ${{ secrets.GIT_TOKEN }}
       with:
-        branch: main
-        force: true
-        github_token: ${{ secrets.GIT_TOKEN }}
+        source-directory: helm-charts/
+        destination-github-username: 'kairemor'
+        destination-repository-name: 'helm-charts'
+        user-email: kairemor@gmail.com
+        commit-message: pushed from github
+        target-branch: main
