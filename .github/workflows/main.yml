@@ -16,7 +16,7 @@ jobs:
     - name: Clone external repo
       uses: actions/checkout@v2
       with:
-        repository: https://github.com/kairemor/helm-charts.git
+        repository: kairemor/helm-charts
         ref: main
         path: helm-charts
     
