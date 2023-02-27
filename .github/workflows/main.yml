@@ -38,7 +38,7 @@ jobs:
     - name: Set image tag in values file
       run: |
         SHORT_COMMIT_HASH=$(git rev-parse --short=7 HEAD)
-        git clone https://github.com/kairemor/helm-charts.git
+        git clone https://github.com/kairemor/helm-charts
         git config --global user.email "kairemor@gmail.com"
         git config --global user.name "Mor Kaire"
         cd helm-charts
