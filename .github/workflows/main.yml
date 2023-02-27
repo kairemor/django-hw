@@ -39,6 +39,8 @@ jobs:
       run: |
         SHORT_COMMIT_HASH=$(git rev-parse --short=7 HEAD)
         git clone https://github.com/kairemor/helm-charts.git
+        git config --global user.email "kairemor@gmail.com"
+        git config --global user.name "Mor Kaire"
         cd helm-charts
         yq eval '.image.tag = "${{ steps.get_commit_hash.outputs.commit_hash }}"' -i values.yaml
         git add values.yaml
