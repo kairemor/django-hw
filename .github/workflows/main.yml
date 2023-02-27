@@ -50,11 +50,11 @@ jobs:
         yq eval '.image.tag = "${{ steps.get_commit_hash.outputs.commit_hash }}"' -i helm_chart/values.yaml
         # git add values.yaml
         # git commit -m "Update image tag in values.yaml"
-        echo ${{ secrets.INPUT_GITHUB_TOKEN }}
+
     
     - name: Run the Action
       uses: devops-infra/action-commit-push@master
       with:
-        github_token: "${{ secrets.INPUT_GITHUB_TOKEN }}"
+        github_token: "${{ secrets.GITHUB_TOKEN }}"
         commit_message: "Automatic commit"
         force: true
