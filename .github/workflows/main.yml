@@ -59,8 +59,8 @@ jobs:
         SSH_DEPLOY_KEY: ${{ secrets.GIT_TOKEN }}
       with:
         source-directory: helm-charts/
-        destination-github-username: 'kairemor'
-        destination-repository-name: 'helm-charts'
+        destination-github-username: "kairemor"
+        destination-repository-name: "helm-charts"
         user-email: kairemor@gmail.com
         commit-message: pushed from github
         target-branch: main
