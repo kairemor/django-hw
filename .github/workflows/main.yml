@@ -41,8 +41,6 @@ jobs:
         COMMIT_HASH: ${{ steps.get_commit_hash.outputs.commit_hash }}
 
     - name: Commit and push changes
-      with:
-        ref: main
       env:
         GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
       run: |
