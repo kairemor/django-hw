@@ -13,12 +13,12 @@ jobs:
     steps:
     - name: Clone external repo
       uses: actions/checkout@v2
-    - name: Clone external repo
-      uses: actions/checkout@v2
-      with:
-        repository: kairemor/helm-charts
-        ref: main
-        path: helm-charts
+    # - name: Clone external repo
+    #   uses: actions/checkout@v2
+    #   with:
+    #     repository: kairemor/helm-charts
+    #     ref: main
+    #     path: helm-charts
     
     - name: Get commit hash
       id: get_commit_hash
@@ -44,12 +44,12 @@ jobs:
       
     - name: Set image tag in values file
       run: |
-        git config --global user.email "kairemor@gmail.com"
-        git config --global user.name "Mor Kaire"
-        cd helm-charts
+        # git config --global user.email "kairemor@gmail.com"
+        # git config --global user.name "Mor Kaire"
+        # cd helm_charts
         yq eval '.image.tag = "${{ steps.get_commit_hash.outputs.commit_hash }}"' -i values.yaml
-        git add values.yaml
-        git commit -m "Update image tag in values.yaml"
+        # git add values.yaml
+        # git commit -m "Update image tag in values.yaml"
 
     
     - name: Run the Action
