@@ -35,12 +35,15 @@ jobs:
         sudo apt-get update
         sudo apt-get install yq -y
 
+    - name: Checkout Helm Charts repository
+      uses: actions/checkout@v2
+      with:
+        repository: kairemor/helm-charts
+      
     - name: Set image tag in values file
       run: |
-        SHORT_COMMIT_HASH=$(git rev-parse --short=7 HEAD)
         git config --global user.email "kairemor@gmail.com"
         git config --global user.name "Mor Kaire"
-        git clone https://${{ secrets.GIT_TOKEN }}@github.com/kairemor/helm-charts.git
         cd helm-charts
         yq eval '.image.tag = "${{ steps.get_commit_hash.outputs.commit_hash }}"' -i values.yaml
         git add values.yaml
