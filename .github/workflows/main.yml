@@ -50,4 +50,4 @@ jobs:
         yq eval '.image.tag = "${{ steps.get_commit_hash.outputs.commit_hash }}"' -i values.yaml
         git add values.yaml
         git commit -m "Update image tag in values.yaml"
-        git push https://${{ secrets.GIT_TOKEN }}@github.com/kairemor/helm-charts.git HEAD:main
+        git push https://${{ secrets.GIT_TOKEN }}@github.com/${{ secrets.DOCKERHUB_USERNAME }}/helm-charts.git HEAD:main
