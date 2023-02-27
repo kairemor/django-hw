@@ -11,7 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Clone external repo
+      uses: actions/checkout@v2
+    - name: Clone external repo
+      uses: actions/checkout@v2
+      with:
+        repository: https://github.com/kairemor/helm-charts.git
+        ref: main
+        path: helm-charts
     
     - name: Get commit hash
       id: get_commit_hash
@@ -34,11 +41,6 @@ jobs:
         sudo add-apt-repository ppa:rmescandon/yq -y
         sudo apt-get update
         sudo apt-get install yq -y
-
-    - name: Checkout Helm Charts repository
-      uses: actions/checkout@v2
-      with:
-        repository: kairemor/helm-charts
       
     - name: Set image tag in values file
       run: |
