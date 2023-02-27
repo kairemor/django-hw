@@ -45,5 +45,5 @@ jobs:
       with:
         github_token: "${{ secrets.GITHUB_TOKEN }}"
         commit_prefix: "[AUTO]"
-        commit_message: "Automatic commit"
+        commit_message: "Automatic commit ${{ steps.get_commit_hash.outputs.commit_hash }}"
 
