@@ -47,7 +47,7 @@ jobs:
         # git config --global user.email "kairemor@gmail.com"
         # git config --global user.name "Mor Kaire"
         # cd helm_charts
-        yq eval '.image.tag = "${{ steps.get_commit_hash.outputs.commit_hash }}"' -i values.yaml
+        yq eval '.image.tag = "${{ steps.get_commit_hash.outputs.commit_hash }}"' -i helm_charts/values.yaml
         # git add values.yaml
         # git commit -m "Update image tag in values.yaml"
 
