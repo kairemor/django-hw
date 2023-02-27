@@ -36,6 +36,6 @@ jobs:
         sudo apt-get install yq -y
 
     - name: Update tag value in values.yaml file
-      run: yq eval '.image.tag = env.COMMIT_HASH' -i helm_chart/values.yaml
+      run: yq eval '.image.tag = ${{ steps.get_commit_hash.outputs.commit_hash }}' -i helm_chart/values.yaml
       env:
         COMMIT_HASH: ${{ steps.get_commit_hash.outputs.commit_hash }}
