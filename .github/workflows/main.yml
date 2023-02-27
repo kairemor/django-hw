@@ -33,8 +33,8 @@ jobs:
     #     username: ${{ secrets.DOCKERHUB_USERNAME }}
     #     password: ${{ secrets.DOCKERHUB_PASSWORD }}
     
-    - name: Push Docker image to DockerHub
-      run: docker push  ${{ secrets.DOCKERHUB_USERNAME }}/django-app:${{ steps.get_commit_hash.outputs.commit_hash }}
+    # - name: Push Docker image to DockerHub
+    #   run: docker push  ${{ secrets.DOCKERHUB_USERNAME }}/django-app:${{ steps.get_commit_hash.outputs.commit_hash }}
 
     - name: Install yq
       run: |
